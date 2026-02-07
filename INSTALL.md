@@ -16,6 +16,34 @@ Verify installation:
 ```bash
 ffmpeg -version
 ```
+## ✅ Option: Use Static FFmpeg Build (Fastest & Cleanest)
+
+Best for **servers, streaming, HLS, RTMP, scripts**, no dependency issues.
+
+### 1️⃣ Download static build
+
+```bash
+curl -L https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz -o ffmpeg.tar.xz
+```
+
+### 2️⃣ Extract & install
+
+```bash
+tar -xf ffmpeg.tar.xz
+cd ffmpeg-*-static
+sudo cp ffmpeg ffprobe /usr/local/bin/
+```
+
+### 3️⃣ Verify
+
+```bash
+ffmpeg -version
+```
+
+✔ Includes **H.264, AAC, MP3, HLS, RTMP, x264, x265**
+✔ No repo headaches
+✔ Ideal for EC2
+
 
 ## Running the Application
 
