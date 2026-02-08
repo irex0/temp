@@ -109,7 +109,7 @@ Stop it if it runs.
 Create the service file:
 
 ```bash
-sudo nano /etc/systemd/system/vidflow-streamer.service
+sudo vim /etc/systemd/system/vidflow-streamer.service
 ```
 
 Paste **exactly this**:
@@ -121,22 +121,33 @@ After=network.target
 
 [Service]
 Type=simple
+# Ensure network is fully up. Using sleep as a simple delay mechanism.
 ExecStartPre=/bin/sleep 10
 ExecStart=/usr/local/bin/vidflow-streamer
 Restart=always
 RestartSec=5
 User=ec2-user
-WorkingDirectory=/usr/local/bin
+# Set WorkingDirectory to user's home or a specific app directory
+WorkingDirectory=/home/ec2-user
+# Explicitly set UPLOAD_DIR to ensure it goes to a writable location with space
+Environment="UPLOAD_DIR=/home/ec2-user/vidflow-uploads"
+# Environment="PORT=3000" # Uncomment to override port
 StandardOutput=journal
 StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
+
 ```
 
 Save and exit.
 
 ---
+
+##  Create upload directory
+```bash
+mkdir -p /home/ec2-user/vidflow-uploads
+```
 
 ## ✅ Step 3: Enable & start the service
 
