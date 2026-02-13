@@ -1,0 +1,15 @@
+app = "vidflow"
+
+[processes]
+  app = "./vidflow-streamer"
+
+[[services]]
+  internal_port = 3000
+  protocol = "tcp"
+
+  [[services.ports]]
+    port = 80
+
+  [[services.ports]]
+    port = 443
+
