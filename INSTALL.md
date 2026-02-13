@@ -132,12 +132,26 @@ WorkingDirectory=/home/ec2-user
 # Explicitly set UPLOAD_DIR to ensure it goes to a writable location with space
 Environment="UPLOAD_DIR=/home/ec2-user/vidflow-uploads"
 # Environment="PORT=3000" # Uncomment to override port
+
+# --- Resource Management Limits ---
+# CPUQuota: Limits CPU usage. 50% means it can use half of one CPU core.
+# If you have multiple cores and want more power, you can use 100%, 200%, etc.
+CPUQuota=80%
+
+# MemoryMax: This is the "Hard Limit". If the app uses more than this, 
+# the system will stop/kill the process to protect the OS.
+MemoryMax=2G
+
+# MemoryHigh: This is a "Soft Limit". Systemd will try to throttle the 
+# app or reclaim memory once it hits this level, but won't kill it yet.
+MemoryHigh=1800M
+# ----------------------------------
+
 StandardOutput=journal
 StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
-
 ```
 
 Save and exit.
